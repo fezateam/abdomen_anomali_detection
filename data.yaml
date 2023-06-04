@@ -1,0 +1,57 @@
+classes:
+  - safra kesesi
+  - pankreas
+  - böbrek-üreter-mesane
+  - apandiks
+  - kolon
+  - abdominal aorta
+
+dataset_path: ./dataset
+extracted_dataset_path: "../Training"
+xls_file: ./dataset/testdata.xlsx
+save_excel: ./results/result.xlsx
+yedek_save_excel: ./result_yedek.xlsx
+save_image_path: ./results
+yedek: 20
+
+safra kesesi:
+  weight: weights/kolesistit.pth # safra kesesi iltihabı
+  config: mm/kolesistit.py
+  subclasses_num: 1
+  patoloji: ["Akut kolesistit ile uyumlu"]
+  iou_threshold: 0.45
+
+pankreas:
+  weight: weights/pankreatit.pth # Pankreastaki enzimlerin hasar görmesi
+  config: mm/pankreatit.py
+  subclasses_num: 1
+  patoloji: ["Akut pankreatit ile uyumlu"]
+  iou_threshold: 0.45
+
+böbrek-üreter-mesane:
+  weight: weights/bobrekureter.pth # Böbrek ve üreter taşları
+  config: mm/bobrekureter.py
+  subclasses_num: 2
+  patoloji: ["Böbrek taşı", "Üreter taşı"]
+  iou_threshold: 0.45
+
+apandiks:
+  weight: weights/apandisit.pth # Apandisit hastalığı
+  config: mm/apandisit.py
+  subclasses_num: 1
+  patoloji: ["Akut apandisit ile uyumlu"]
+  iou_threshold: 0.1
+
+kolon:
+  weight: weights/divertikulit.pth
+  config: mm/divertikulit.py
+  subclasses_num: 1
+  patoloji: ["Akut divertikülit ile uyumlu"]
+  iou_threshold: 0.1
+
+abdominal aorta:
+  weight: weights/anevrizmadiseksiyon.pth # Abdominal aort anevrizması karın ana atardamarının genişleyerek balonlaşmasıdır, diseksiyon aort damarının yırtılması
+  config: mm/anevrizmadiseksiyon.py
+  subclasses_num: 2
+  patoloji: ["Abdominal aort anevrizma", "Abdominal aort diseksiyon"]
+  iou_threshold: 0.45
